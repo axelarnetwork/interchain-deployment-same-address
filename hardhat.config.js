@@ -1,5 +1,6 @@
 require("dotenv").config();
 require("@nomicfoundation/hardhat-toolbox");
+require("@nomiclabs/hardhat-ethers");
 
 const MUMBAI = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.MUMBAI}`;
 const AVALANCHE = `https://avalanche-fuji.infura.io/v3/${process.env.AVALANCHE}`;

@@ -11,13 +11,15 @@ async function main() {
   const currentTimestampInSeconds = Math.round(Date.now() / 1000);
   const unlockTime = currentTimestampInSeconds + 60;
 
-  const lockedAmount = hre.ethers.parseEther("0.001");
-
   const chains = getEvmChains();
+
+  const walletInit = new Wallet(process.env.PRIVATE_KEY);
 
   chains.map(async (chain) => {
     const provider = getDefaultProvider(chain.rpc);
+    console.log(provider, "provider");
     const wallet = walletInit.connect(provider);
+    console.log(wallet.address);
     const lockContract = await deployContract(wallet, LockAbi, [unlockTime]);
     console.log(lockContract.address);
   });

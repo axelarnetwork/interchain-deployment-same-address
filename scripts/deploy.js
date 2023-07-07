@@ -17,11 +17,9 @@ async function main() {
 
   chains.map(async (chain) => {
     const provider = getDefaultProvider(chain.rpc);
-    console.log(provider, "provider");
     const wallet = walletInit.connect(provider);
-    console.log(wallet.address);
     const lockContract = await deployContract(wallet, LockAbi, [unlockTime]);
-    console.log(lockContract.address);
+    console.log("contract address:", lockContract.address);
   });
 
   // console.log(

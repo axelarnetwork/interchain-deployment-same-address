@@ -2,7 +2,8 @@ const { Wallet, getDefaultProvider } = require("ethers");
 const {
   utils: { deployContract },
 } = require("@axelar-network/axelar-local-dev");
-const LockAbi = requre("../artifacts/contracts/Lock.sol/Lock.json");
+const LockAbi = require("../artifacts/contracts/Lock.sol/Lock.json");
+const chains = require("../chains.json");
 
 const hre = require("hardhat");
 
@@ -12,28 +13,28 @@ async function main() {
 
   const lockedAmount = hre.ethers.parseEther("0.001");
 
-  // const lock = await hre.ethers.deployContract("Lock", [unlockTime], {
-  //   value: lockedAmount,
-  // });
-  const provider = getDefaultProvider(chain.rpc);
-  const wallet = walletInit.connect(provider);
+  const chains = getEvmChains();
 
-  const myContract = await deployContract(wallet, SendAck, [
-    chain.gateway,
-    chain.gasReceiver,
-  ]);
+  chains.map(async (chain) => {
+    const provider = getDefaultProvider(chain.rpc);
+    const wallet = walletInit.connect(provider);
+    const lockContract = await deployContract(wallet, LockAbi, [unlockTime]);
+    console.log(lockContract.address);
+  });
 
-  await lock.waitForDeployment();
-
-  console.log(
-    `Lock with ${ethers.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
-  );
+  // console.log(
+  //   `Lock with ${ethers.formatEther(
+  //     lockedAmount
+  //   )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
+  // );
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
+function getEvmChains() {
+  return chains.map((chain) => ({
+    ...chain,
+  }));
+}
+
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;

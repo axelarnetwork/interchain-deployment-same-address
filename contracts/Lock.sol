@@ -10,13 +10,10 @@ contract Lock {
 
     event Withdrawal(uint amount, uint when);
 
-    constructor(uint _unlockTime) payable {
-        require(
-            block.timestamp < _unlockTime,
-            "Unlock time should be in the future"
-        );
+    constructor() payable {
+        require(block.timestamp < 12, "Unlock time should be in the future");
 
-        unlockTime = _unlockTime;
+        unlockTime = 12;
         owner = payable(msg.sender);
     }
 

@@ -1,6 +1,6 @@
 require("dotenv").config();
 require("@nomicfoundation/hardhat-toolbox");
-require('@nomiclabs/hardhat-ethers')
+require("@nomiclabs/hardhat-ethers");
 
 const MUMBAI_RPC = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.MUMBAI}`;
 const AVALANCHE_RPC = `https://avalanche-fuji.infura.io/v3/${process.env.AVALANCHE}`;

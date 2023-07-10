@@ -23,5 +23,11 @@ Note: The address you see will not be the same as this address. As long as the t
 
 ## Potential Bugs:
 
-- Gas: Make sure your address who's private key you are referencing has enough gas to deploy the contract on both chains
-- Nonce: If the address is deploying but the addresses are different your nonce may be out of sync for the two blockchains
+- Gas:
+  - Make sure your address who's private key you are referencing has enough gas to deploy the contract on both chains
+- Nonce:
+  - If the address is deploying but the addresses are different your nonce may be out of sync for the two blockchains.
+  - The way to check the nonce for your address is by using ethers in the cli.
+    1. To do so run: `hh console --network mumbai` (change the flag to avalanche for checking avalanche)
+    2. Run `await ethers.provider.getTransactionCount("YOUR_ADDRESS")`
+    3. Compare the nonce count for both networks. If they are different simply execute a tx one the blockchain with a lower nonce. Continue excecuting txs until the nonces on both blockchains are the same.

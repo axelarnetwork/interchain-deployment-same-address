@@ -1,12 +1,16 @@
 import { Wallet, getDefaultProvider } from "ethers";
 import { utils } from "@axelar-network/axelar-local-dev";
-import LockAbi from "../artifacts/contracts/Lock.sol/Lock.json";
+import Lock from "../artifacts/contracts/Lock.sol/Lock.json";
 import ConstAddressDeployer from "../node_modules/@axelar-network/axelar-gmp-sdk-solidity/artifacts/contracts/deploy/ConstAddressDeployer.sol/ConstAddressDeployer.json";
 import chains from "../chains.json";
 
 async function main() {
   const currentTimestampInSeconds = Math.round(Date.now() / 1000);
   const unlockTime = currentTimestampInSeconds + 60;
+  const unlockTimeBytes = ethers.utils.hexZeroPad(
+    ethers.utils.hexlify(unlockTime),
+    32
+  );
 
   const evmChains = getEvmChains();
   const privateKey = process.env.PRIVATE_KEY;
@@ -26,18 +30,19 @@ async function main() {
     const provider = getDefaultProvider(chain.rpc);
     const connectedWallet = wallet.connect(provider);
 
-    const greetingMessagesContract = new ethers.Contract(
+    const deployerContract = new ethers.Contract(
       AddressDeployerAddr,
       ConstAddressDeployer.abi,
       connectedWallet
     );
 
-    const deployedAddr = await greetingMessagesContract.deploy(
-      ConstAddressDeployer.bytecode,
-      ethers.utils.hexZeroPad(ethers.BigNumber.from(7), 32)
+    const deployedAddr = await deployerContract.deploy(
+      Lock.bytecode,
+      ethers.utils.hexZeroPad(ethers.BigNumber.from(200), 32)
+      // unlockTimeBytes
     );
     const receipt = await deployedAddr.wait();
-    console.log(receipt.events[0].args, "the log");
+    console.log(receipt.events[0].args.deployedAddress, "the log");
   }
 }
 

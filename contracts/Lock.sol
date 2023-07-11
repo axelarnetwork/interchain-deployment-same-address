@@ -11,12 +11,12 @@ contract Lock {
     event Withdrawal(uint amount, uint when);
 
     function initialize(uint256 _unlockTime) public payable {
-        // require(
-        //     block.timestamp < _unlockTime,
-        //     "Unlock time should be in the future"
-        // );
+        require(
+            block.timestamp < _unlockTime,
+            "Unlock time should be in the future"
+        );
         unlockTime = _unlockTime;
-        // owner = payable(msg.sender);
+        owner = payable(msg.sender);
     }
 
     function withdraw() public {

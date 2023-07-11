@@ -33,16 +33,6 @@ async function main() {
       connectedWallet
     );
 
-    const gasLimit = 2000000; // Set a suitable gas limit value
-    const maxFeePerGas = ethers.utils.parseUnits("100", "gwei"); // Set a suitable maxFeePerGas value
-    const maxPriorityFeePerGas = ethers.utils.parseUnits("1", "gwei"); // Set a suitable maxPriorityFeePerGas value
-
-    const overrides = {
-      gasLimit,
-      maxFeePerGas,
-      maxPriorityFeePerGas,
-    };
-
     // Encode the function call
     const initFunction = "initialize(uint256)";
     const initData = ethers.utils.defaultAbiCoder.encode(
@@ -57,9 +47,8 @@ async function main() {
 
     const deployedAddr = await deployerContract.deployAndInit(
       Lock.bytecode,
-      ethers.utils.hexZeroPad(BigNumber.from(222), 32),
-      encodedInitData,
-      overrides
+      ethers.utils.hexZeroPad(BigNumber.from(225), 32),
+      encodedInitData
     );
     const receipt = await deployedAddr.wait();
     console.log(receipt.events[0].args.deployedAddress, "the log");

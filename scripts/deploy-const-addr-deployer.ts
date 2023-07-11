@@ -1,5 +1,5 @@
 import { Wallet, getDefaultProvider, BigNumber, ethers } from 'ethers';
-import Lock from '../artifacts/contracts/Lock.sol/Lock.json';
+import Lock from '../artifacts/contracts/LockInit.sol/LockInit.json';
 import ConstAddressDeployer from '@axelar-network/axelar-gmp-sdk-solidity/artifacts/contracts/deploy/ConstAddressDeployer.sol/ConstAddressDeployer.json';
 import chains from '../chains.json';
 
@@ -22,7 +22,8 @@ async function main() {
 
         const deployerContract = new ethers.Contract(CONST_ADDRESS_DEPLOYER_ADDR, ConstAddressDeployer.abi, connectedWallet);
 
-        const salt = ethers.utils.hexZeroPad(BigNumber.from(3), 32);
+        //salt (make sure this salt has not been used already)
+        const salt = ethers.utils.hexZeroPad(BigNumber.from(1), 32);
 
         const deployedAddr = await deployerContract.deployAndInit(Lock.bytecode, salt, initData);
         const receipt = await deployedAddr.wait();

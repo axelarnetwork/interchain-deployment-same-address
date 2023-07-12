@@ -2,17 +2,15 @@ import dotenv from 'dotenv';
 import { HardhatUserConfig } from 'hardhat/types';
 import '@nomicfoundation/hardhat-toolbox';
 import '@nomiclabs/hardhat-ethers';
+import chains from './chains.json';
 
 dotenv.config();
-
-const MUMBAI_RPC = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.MUMBAI}`;
-const AVALANCHE_RPC = `https://avalanche-fuji.infura.io/v3/${process.env.AVALANCHE}`;
 
 const config: HardhatUserConfig = {
     solidity: '0.8.18',
     networks: {
         mumbai: {
-            url: MUMBAI_RPC,
+            url: chains[0].rpc,
             accounts: [`0x${process.env.PRIVATE_KEY}`],
             network_id: 80001,
             timeoutBlocks: 200,
@@ -22,7 +20,7 @@ const config: HardhatUserConfig = {
             skipDryRun: true,
         },
         avalanche: {
-            url: AVALANCHE_RPC,
+            url: chains[1].rpc,
             accounts: [`0x${process.env.PRIVATE_KEY}`],
             network_id: 43113,
             timeoutBlocks: 200,

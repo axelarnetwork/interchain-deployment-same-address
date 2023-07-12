@@ -23,7 +23,7 @@ async function main() {
         const deployerContract = new ethers.Contract(CONST_ADDRESS_DEPLOYER_ADDR, ConstAddressDeployer.abi, connectedWallet);
 
         //salt (make sure this salt has not been used already)
-        const salt = ethers.utils.hexZeroPad(BigNumber.from(10), 32);
+        const salt = ethers.utils.hexZeroPad(BigNumber.from(11), 32);
 
         const deployedAddr = await deployerContract.deployAndInit(Lock.bytecode, salt, initData);
         const receipt = await deployedAddr.wait();

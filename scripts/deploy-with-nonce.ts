@@ -1,4 +1,4 @@
-import { Wallet, getDefaultProvider, utils } from 'ethers';
+import { Wallet, getDefaultProvider } from 'ethers';
 import { deployContract } from '@axelar-network/axelar-local-dev';
 import LockAbi from '../artifacts/contracts/Lock.sol/Lock.json';
 import chains from '../chains.json';
@@ -9,12 +9,17 @@ async function main() {
 
     const evmChains = getEvmChains();
 
-    const walletInit = new Wallet(process.env.PRIVATE_KEY);
+    const privateKey = process.env.PRIVATE_KEY;
 
+    if (!privateKey) {
+        throw new Error('Invalid private key. Make sure the PRIVATE_KEY environment variable is set.');
+    }
+
+    const wallet = new Wallet(privateKey);
     for (const chain of evmChains) {
         const provider = getDefaultProvider(chain.rpc);
-        const wallet = walletInit.connect(provider);
-        const lockContract = await deployContract(wallet, LockAbi, [unlockTime]);
+        const connectedWallet = wallet.connect(provider);
+        const lockContract = await deployContract(connectedWallet, LockAbi, [unlockTime]);
         console.log(`${chain.name} contract address: ${lockContract.address}`);
     }
 }

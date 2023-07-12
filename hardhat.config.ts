@@ -9,7 +9,7 @@ dotenv.config();
 const config: HardhatUserConfig = {
     solidity: '0.8.18',
     networks: {
-        mumbai: {
+        polygon: {
             url: chains[0].rpc,
             accounts: [`0x${process.env.PRIVATE_KEY}`],
             network_id: 80001,

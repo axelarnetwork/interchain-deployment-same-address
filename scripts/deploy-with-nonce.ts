@@ -19,7 +19,7 @@ async function main() {
         const provider = getDefaultProvider(chain.rpc);
         const wallet = walletInit.connect(provider);
         const lockContract = await deployContract(wallet, LockAbi, [unlockTime]);
-        console.log('contract address:', lockContract.address);
+        console.log(`${chain.name} contract address: ${lockContract.address}`);
     });
 }
 

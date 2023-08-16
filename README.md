@@ -1,4 +1,4 @@
-# Multichain Deployment
+# Interchain Deployment
 
 Execute the deploy script to be able to deploy the Greeter contract on both the Avalanche and the Polygon blockchains.
 
@@ -6,8 +6,8 @@ Execute the deploy script to be able to deploy the Greeter contract on both the 
 
 1. Clone the repo
 2. Update the .env files to include
-   - Your private key
-   - RPC key for mumbai and avalanche
+    - Your private key
+    - RPC key for mumbai and avalanche
 3. Run the command `hh run scripts/deploy.ts`
 
 ## Expect Output
@@ -23,11 +23,11 @@ Note: The address you see will not be the same as this address. As long as the t
 
 ## Potential Bugs:
 
-- Gas:
-  - Make sure your address whos private key you are referencing has enough gas to deploy the contract on both chains
-- Nonce:
-  - If the address is deploying but the addresses are different your nonce may be out of sync for the two blockchains.
-  - The way to check the nonce for your address is by using ethers in the cli.
-    1. To do so run: `hh console --network mumbai` (change the flag to avalanche for checking avalanche)
-    2. Run `await ethers.provider.getTransactionCount("YOUR_ADDRESS")`
-    3. Compare the nonce count for both networks. If they are different simply execute a tx one the blockchain with a lower nonce. Continue excecuting txs until the nonces on both blockchains are the same. Once they are the same re-run the deploy script.
+-   Gas:
+    -   Make sure your address whos private key you are referencing has enough gas to deploy the contract on both chains
+-   Nonce:
+    -   If the address is deploying but the addresses are different your nonce may be out of sync for the two blockchains.
+    -   The way to check the nonce for your address is by using ethers in the cli.
+        1. To do so run: `hh console --network mumbai` (change the flag to avalanche for checking avalanche)
+        2. Run `await ethers.provider.getTransactionCount("YOUR_ADDRESS")`
+        3. Compare the nonce count for both networks. If they are different simply execute a tx one the blockchain with a lower nonce. Continue excecuting txs until the nonces on both blockchains are the same. Once they are the same re-run the deploy script.

@@ -1,6 +1,6 @@
 import { Wallet, getDefaultProvider } from 'ethers';
 import { deployContract } from '@axelar-network/axelar-local-dev';
-import LockAbi from '../artifacts/contracts/Lock.sol/Lock.json';
+import Lock from '../artifacts/contracts/Lock.sol/Lock.json';
 import chains from '../chains.json';
 
 async function main() {
@@ -19,7 +19,7 @@ async function main() {
     for (const chain of evmChains) {
         const provider = getDefaultProvider(chain.rpc);
         const connectedWallet = wallet.connect(provider);
-        const lockContract = await deployContract(connectedWallet, LockAbi, [unlockTime]);
+        const lockContract = await deployContract(connectedWallet, Lock, [unlockTime]);
         console.log(`${chain.name} contract address: ${lockContract.address}`);
     }
 }

@@ -8,7 +8,9 @@ Execute the deploy script to be able to deploy the Greeter contract on both the 
 2. Update the .env files to include
     - Your private key
     - RPC key for mumbai and avalanche
-3. Run the command `hh run scripts/deploy.ts`
+3. Install dependencies
+    - npm i
+4. Run the command `hh run scripts/deploy.ts`
 
 ## Expect Output
 

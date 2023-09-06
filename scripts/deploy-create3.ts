@@ -24,9 +24,8 @@ async function main() {
 
         const deployerContract = new ethers.Contract(CREATE_3_DEPLOYER, Create3Deployer.abi, connectedWallet);
 
-        const salt = ethers.utils.hexZeroPad(BigNumber.from(169), 32);
+        const salt = ethers.utils.hexZeroPad(BigNumber.from(101), 32);
 
-        // const deployedAddress = await deployerContract.callStatic.deployAndInit(Lock.bytecode, salt, initData);
         const creationCode = ethers.utils.solidityPack(
             ['bytes', 'bytes'],
             [Lock.bytecode, ethers.utils.defaultAbiCoder.encode(['uint256'], [unlockTime])]
@@ -36,20 +35,6 @@ async function main() {
         console.log(`${chain.name}, address: ${deployedAddress}`);
     }
 }
-
-// function encodeConstructor() {
-//     const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-//     const unlockTime = currentTimestampInSeconds + 60;
-
-//     // Encode the function call
-//     // const initFunction = 'intialize(uint256)';
-//     const initFunction = 'constructor(uint256)';
-//     const initData = ethers.utils.defaultAbiCoder.encode(['uint256'], [unlockTime]);
-//     const initSignature = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(initFunction)).slice(0, 10);
-
-//     // Remove 0x
-//     return initSignature + initData.substring(2);
-// }
 
 function getEvmChains() {
     return chains.map((chain) => ({ ...chain }));

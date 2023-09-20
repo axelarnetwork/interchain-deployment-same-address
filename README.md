@@ -10,14 +10,17 @@ Execute the deploy script to be able to deploy the Greeter contract on both the 
     - RPC key for mumbai and avalanche
 3. Install dependencies
     - npm i
-4. Run the command `hh run scripts/deploy.ts`
+4. Run the deploy script
+    - Nonce Deployment: `hh run scripts/deploy-with-nonce.ts`
+    - Create2 Deployment: `hh run scripts/deploy-create2.ts`
+    - Create3 Deployment: `hh run scripts/deploy-create3.ts`
 
 ## Expect Output
 
 The output should be as follows:
 
 ```
-Mumbai contract address: 0xA64092330c3f730D7C1518Ed8417a23b9c61C7FF
+Polygon contract address: 0xA64092330c3f730D7C1518Ed8417a23b9c61C7FF
 Avalanche contract address: 0xA64092330c3f730D7C1518Ed8417a23b9c61C7FF
 ```
 

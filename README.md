@@ -9,7 +9,8 @@ Execute the deploy script to be able to deploy the Greeter contract on both the 
     - Your private key
     - RPC key for mumbai and avalanche
 3. Install dependencies
-    - npm i
+    - `npm i`
+    NOTE: In case of ethers versioning issue run `npm i --legacy-peer-deps` 
 4. Run the deploy script
     - Nonce Deployment: `hh run scripts/deploy-with-nonce.ts`
     - Create2 Deployment: `hh run scripts/deploy-create2.ts`
@@ -17,7 +18,7 @@ Execute the deploy script to be able to deploy the Greeter contract on both the 
 
 ## Expect Output
 
-The output should be as follows:
+An example of the output should be as follows:
 
 ```
 Polygon contract address: 0xA64092330c3f730D7C1518Ed8417a23b9c61C7FF
@@ -29,10 +30,10 @@ Note: The address you see will not be the same as this address. As long as the t
 ## Potential Bugs:
 
 -   Gas:
-    -   Make sure your address whos private key you are referencing has enough gas to deploy the contract on both chains
+    -   Make sure your address who's private key you are referencing has enough gas to deploy the contract on both chains
 -   Nonce:
     -   If the address is deploying but the addresses are different your nonce may be out of sync for the two blockchains.
     -   The way to check the nonce for your address is by using ethers in the cli.
         1. To do so run: `hh console --network mumbai` (change the flag to avalanche for checking avalanche)
         2. Run `await ethers.provider.getTransactionCount("YOUR_ADDRESS")`
-        3. Compare the nonce count for both networks. If they are different simply execute a tx one the blockchain with a lower nonce. Continue excecuting txs until the nonces on both blockchains are the same. Once they are the same re-run the deploy script.
+        3. Compare the nonce count for both networks. If they are different simply execute a tx one the blockchain with a lower nonce. Continue executing txs until the nonces on both blockchains are the same. Once they are the same re-run the deploy script.

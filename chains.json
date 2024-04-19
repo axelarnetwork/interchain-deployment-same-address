@@ -3,7 +3,7 @@
         "name": "Polygon",
         "chainId": 80001,
         "gateway": "0xBF62ef1486468a6bd26Dd669C06db43dEd5B849B",
-        "rpc": "https://rpc.ankr.com/polygon_mumbai",
+        "rpc": "https://polygon-mumbai-bor-rpc.publicnode.com",
         "tokenName": "Matic",
         "tokenSymbol": "MATIC"
     },

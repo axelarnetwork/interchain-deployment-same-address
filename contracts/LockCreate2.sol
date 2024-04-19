@@ -4,16 +4,16 @@ pragma solidity ^0.8.18;
 // Uncomment this line to use console.log
 // import "hardhat/console.sol";
 
-contract LockInit {
+contract LockCreate2 {
     uint public unlockTime;
     address payable public owner;
 
     event Withdrawal(uint amount, uint when);
 
-    function initialize(uint256 _unlockTime) public payable {
+    function initialize(uint256 _unlockTime, address _owner) public payable {
         require(block.timestamp < _unlockTime, 'Unlock time should be in the future');
         unlockTime = _unlockTime;
-        owner = payable(msg.sender);
+        owner = payable(_owner);
     }
 
     function withdraw() public {

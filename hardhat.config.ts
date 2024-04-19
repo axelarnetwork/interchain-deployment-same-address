@@ -9,15 +9,15 @@ dotenv.config();
 const config: HardhatUserConfig = {
     solidity: '0.8.18',
     networks: {
-        polygon: {
+        celo: {
             url: chains[0].rpc,
             accounts: [`0x${process.env.PRIVATE_KEY}`],
-            chainId: 80001,
+            chainId: chains[0].chainId,
         },
-        avalanche: {
+        fantom: {
             url: chains[1].rpc,
             accounts: [`0x${process.env.PRIVATE_KEY}`],
-            chainId: 43113,
+            chainId: chains[1].chainId,
         },
     },
 };

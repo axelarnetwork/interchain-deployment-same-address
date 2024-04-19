@@ -1,18 +1,22 @@
 [
     {
-        "name": "Polygon",
-        "chainId": 80001,
-        "gateway": "0xBF62ef1486468a6bd26Dd669C06db43dEd5B849B",
-        "rpc": "https://polygon-mumbai-bor-rpc.publicnode.com",
-        "tokenName": "Matic",
-        "tokenSymbol": "MATIC"
-    },
-    {
-        "name": "Avalanche",
-        "chainId": 43113,
-        "rpc": "https://api.avax-test.network/ext/bc/C/rpc",
-        "gateway": "0xC249632c2D40b9001FE907806902f63038B737Ab",
-        "tokenName": "Avax",
-        "tokenSymbol": "AVAX"
-    }
+        "name": "Celo",
+        "chainId": 44787,
+        "rpc": "https://alfajores-forno.celo-testnet.org",
+        "gateway": "0xe432150cce91c13a887f7D836923d5597adD8E31",
+        "gasService": "0xbE406F0189A0B4cf3A05C286473D23791Dd44Cc6",
+        "wmatic": "0x21ba4f6aEdA155DD77Cc33Fb93646910543F0380",
+        "tokenName": "Celo",
+        "tokenSymbol": "CELO"
+      },
+      {
+        "name": "Fantom",
+        "chainId": 4002,
+        "rpc": "https://4002.rpc.thirdweb.com",
+        "aUSDC": "0x75Cc4fDf1ee3E781C1A3Ee9151D5c6Ce34Cf5C61",
+        "gateway": "0x97837985Ec0494E7b9C71f5D3f9250188477ae14",
+        "gasService": "0xbE406F0189A0B4cf3A05C286473D23791Dd44Cc6",
+        "tokenName": "Fantom",
+        "tokenSymbol": "FTM"
+      }
 ]

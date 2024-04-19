@@ -24,7 +24,7 @@ async function main() {
 
         const deployerContract = new ethers.Contract(CREATE_3_DEPLOYER, Create3Deployer.abi, connectedWallet);
 
-        const salt = ethers.utils.hexZeroPad(BigNumber.from(888).toHexString(), 32);
+        const salt = ethers.utils.hexZeroPad(BigNumber.from(550).toHexString(), 32);
 
         const creationCode = ethers.utils.solidityPack(
             ['bytes', 'bytes'],

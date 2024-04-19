@@ -12,18 +12,18 @@ async function main() {
         throw new Error('Invalid private key. Make sure the PRIVATE_KEY environment variable is set.');
     }
 
-    const initData = encodeInitData(0xc5DcAC3e02f878FE995BF71b1Ef05153b71da8BE);
     const evmChains = getEvmChains();
     
     for (const chain of evmChains) {
         const wallet = new Wallet(privateKey);
+        const initData = encodeInitData(wallet.address);
         const provider = getDefaultProvider(chain.rpc);
         const connectedWallet = wallet.connect(provider);
 
         const deployerContract = new ethers.Contract(CONST_ADDRESS_DEPLOYER_ADDR, ConstAddressDeployer.abi, connectedWallet);
 
         //salt (make sure this salt has not been used already)
-        const salt = ethers.utils.hexZeroPad(BigNumber.from(888).toHexString(), 78);
+        const salt = ethers.utils.hexZeroPad(BigNumber.from(550).toHexString(), 32);
 
         const deployedAddr = await deployerContract.deployAndInit(Lock.bytecode, salt, initData);
         const receipt = await deployedAddr.wait();
@@ -37,8 +37,8 @@ function encodeInitData(wallet) {
     const unlockTime = currentTimestampInSeconds + 60;
 
     // Encode the function call
-    const initFunction = 'initialize(uint256)';
-    const initData = ethers.utils.defaultAbiCoder.encode(['uint256', 'address'], [unlockTime, wallet.address]);
+    const initFunction = 'initialize(uint256,address)';
+    const initData = ethers.utils.defaultAbiCoder.encode(['uint256', 'address'], [unlockTime, wallet]);
     const initSignature = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(initFunction)).slice(0, 10);
 
     // Remove 0x
